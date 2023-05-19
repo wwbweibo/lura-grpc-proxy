@@ -10,18 +10,9 @@ import (
 
 	luraconfig "github.com/luraproject/lura/config"
 	"github.com/pkg/errors"
-	"github.com/spf13/viper"
 	"github.com/wwbweibo/lura-grpc-proxy/internal/domain"
 	"github.com/wwbweibo/lura-grpc-proxy/internal/utils"
 )
-
-type Config struct {
-	// Settings specified the dir of lura settings file
-	Settings string `json:"settings"`
-}
-
-func (cfg *Config) Hook(v *viper.Viper) {
-}
 
 // RuntimeConfig is init during the runtime for per defined routes. something like kv
 type RuntimeConfig struct {
