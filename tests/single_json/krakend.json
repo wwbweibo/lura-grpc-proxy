@@ -1,0 +1,76 @@
+{
+    "$schema": "https://www.krakend.io/schema/v3.json",
+    "version": 3,
+    "name": "KrakenD - API Gateway",
+    "timeout": "60000ms",
+    "cache_ttl": "300s",
+    "output_encoding": "json",
+    "plugin": {
+        "pattern": ".so",
+        "folder": "/opt/krakend/plugins/"
+    },
+    "endpoints": [
+        {
+            "endpoint": "/api/echo/{path_name}",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "input_headers": [
+                "*"
+            ],
+            "input_query_strings": [
+                "*"
+            ],
+            "backend": [
+                {
+                    "url_pattern": "/api/echo/{path_name}",
+                    "encoding": "no-op",
+                    "sd": "static",
+                    "method": "GET",
+                    "host": [
+                        "testserver:50051"
+                    ],
+                    "disable_host_sanitize": false,
+                    "extra_config": {
+                        "plugin/http-client": {
+                            "name": "lura-grpc-proxy",
+                            "request-handler": {
+                                "method_name": "proto.EchoService/Get"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "endpoint": "/api/echo/{path_name}",
+            "method": "POST",
+            "output_encoding": "no-op",
+            "input_headers": [
+                "*"
+            ],
+            "input_query_strings": [
+                "*"
+            ],
+            "backend": [
+                {
+                    "url_pattern": "/api/echo/{path_name}",
+                    "encoding": "no-op",
+                    "sd": "static",
+                    "method": "POST",
+                    "host": [
+                        "testserver:50051"
+                    ],
+                    "disable_host_sanitize": false,
+                    "extra_config": {
+                        "plugin/http-client": {
+                            "name": "lura-grpc-proxy",
+                            "request-handler": {
+                                "method_name": "proto.EchoService/Post"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

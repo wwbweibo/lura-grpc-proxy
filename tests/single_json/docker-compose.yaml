@@ -1,0 +1,18 @@
+version: '3'
+
+networks:
+  gateway-test:
+    driver: bridge
+
+services:
+  testserver:
+    image: testserver
+  gateway:
+    image: gateway:latest
+    volumes:
+      - ./krakend.json:/etc/krakend/krakend.json
+    entrypoint: [ "krakend", "run", "-c", "/etc/krakend/krakend.json"]
+    ports:
+      - "8080:8080"
+    links:
+      - testserver

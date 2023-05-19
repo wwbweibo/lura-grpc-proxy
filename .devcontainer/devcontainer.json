@@ -6,7 +6,8 @@
 	"image": "mcr.microsoft.com/devcontainers/go:0-1.18",
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
-	}
+	},
+	"postCreateCommand": "bash ./.devcontainer/post.sh"
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
